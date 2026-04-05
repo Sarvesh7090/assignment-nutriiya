@@ -4,6 +4,8 @@ import 'package:http/http.dart' as http;
 import 'package:nutriiya/app/view/features/dashboard/data/model/movie_model.dart';
 import 'package:nutriiya/app/view/features/dashboard/data/model/movie_request_model.dart';
 
+import '../../../../../core/constants/api_constants.dart';
+
 abstract class DashboardDataSource{
   Future<MovieResponseModel> getMovies({
     required int page,
@@ -15,14 +17,21 @@ class DashboardDataSourceImpl extends DashboardDataSource {
     required int page,
     required String query,
   }) async {
+    print("enter in data source 1");
     try {
-      final response = await http.get(
-        Uri.parse(
-          "https://www.omdbapi.com/?s=$query&page=$page&apikey=25ccdd26",
-        ),
+      print("enter in data source 2");
+
+      final url = Uri.parse(
+        "${ApiConstants.baseUrl}?s=$query&page=$page&apikey=${ApiConstants.apiKey}",
       );
 
+      print("enter in data source 3");
+
+      final response = await http.get(url);
       final decoded = json.decode(response.body);
+
+      print("STATUS: ${response.statusCode}");
+      print("BODY: ${response.body}");
 
       if (response.statusCode == 200) {
         if (decoded["Response"] == "True") {
@@ -31,12 +40,12 @@ class DashboardDataSourceImpl extends DashboardDataSource {
           throw Exception(decoded["Error"] ?? "No data found");
         }
       } else {
-        // ✅ HANDLE THIS CASE (IMPORTANT)
         throw Exception("Server error: ${response.statusCode}");
       }
 
     } catch (e) {
-      throw Exception("failed to load data inside catch: ${e.toString()}");
+      print("❌ API ERROR: $e");
+      throw Exception("API Failed: $e");
     }
   }
 }

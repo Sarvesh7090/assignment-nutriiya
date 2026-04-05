@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
   const MyApp({required this.prefs});
   @override
   Widget build(BuildContext context) {
-    final remoteDataSource = MovieRemoteDataSource();
+    final remoteDataSource = DashboardDataSourceImpl();
     final localDataSource = MovieRemoteDataSource();
 
     final repository = MovieRepositoryImpl(

@@ -91,11 +91,14 @@ class MovieRemoteDataSource {
     required int page,
     required String query,
   }) async {
+    print("enter in MovieRemoteDataSource local 1");
     final url = Uri.parse(
       "${ApiConstants.baseUrl}?s=$query&page=$page&apikey=${ApiConstants.apiKey}",
     );
-
+    print("enter in MovieRemoteDataSource local 2");
     final response = await http.get(url);
+    print("STATUS local: ${response.statusCode}");
+    print("BODY local: ${response.body}");
     final decoded = json.decode(response.body);
 
     if (response.statusCode != 200) {

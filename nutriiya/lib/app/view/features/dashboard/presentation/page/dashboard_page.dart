@@ -52,17 +52,16 @@ class _HomeScreenState extends State<HomeScreen> {
         return Center(child: Text("No Movies Found"));
       }else{
         return ListView.builder(
-          controller: _controller,
           itemCount: vm.movies.length,
           itemBuilder: (context, index) {
-            final movie = vm.movies[index];
-            print("movie.title ${movie.title}");
+            final movie = vm.movies[index]; // ✅ each item is Search
+
             return ListTile(
               leading: Image.network(
                 movie.poster,
                 width: 50,
                 errorBuilder: (_, __, ___) =>
-                    Icon(Icons.image_not_supported),
+                    Icon(Icons.broken_image),
               ),
               title: Text(movie.title),
               subtitle: Text(movie.year),

@@ -6,7 +6,7 @@ import '../datasources/dasboard_data_source.dart';
 import '../datasources/dashboard_local_data_source.dart';
 
 class MovieRepositoryImpl implements MovieRepository {
-  final MovieRemoteDataSource remote;
+  final DashboardDataSource remote;
   MovieRepositoryImpl(this.remote);
 
   @override
@@ -14,6 +14,7 @@ class MovieRepositoryImpl implements MovieRepository {
     required int page,
     required String query,
   }) async {
+    print("enter in MovieRepositoryImpl");
     try {
       final model = await remote.getMovies(page: page, query: query);
       return model.toEntity();

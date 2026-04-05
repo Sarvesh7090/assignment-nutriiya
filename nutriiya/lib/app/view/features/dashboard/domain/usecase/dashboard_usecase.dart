@@ -15,6 +15,7 @@ class GetMoviesUseCase{
     required int page,
     required String query,
   }) {
+    print("enter in usecase");
     return repository.getMovies(page: page, query: query);
   }
 }
