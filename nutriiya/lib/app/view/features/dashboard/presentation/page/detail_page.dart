@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import '../../domain/entity/movie_entity.dart';
+import '../../data/model/movie_model.dart';
+
 
 class DetailScreen extends StatelessWidget {
-  final MovieEntity movie;
+  final Search movie;
 
-  const DetailScreen({required this.movie});
+   DetailScreen({required this.movie});
 
   @override
   Widget build(BuildContext context) {
@@ -17,9 +18,10 @@ class DetailScreen extends StatelessWidget {
           children: [
             Image.network(
               movie.poster,
+              headers: {
+                "User-Agent": "Mozilla/5.0",
+              },
               height: 250,
-              errorBuilder: (_, __, ___) =>
-                  Icon(Icons.image_not_supported, size: 100),
             ),
             SizedBox(height: 20),
             Text(

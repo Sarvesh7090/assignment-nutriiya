@@ -2,27 +2,21 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:nutriiya/app/view/features/dashboard/data/model/movie_model.dart';
-import 'package:nutriiya/app/view/features/dashboard/data/model/movie_request_model.dart';
 
 import '../../../../../core/constants/api_constants.dart';
 
 abstract class DashboardDataSource{
-  Future<MovieResponseModel> getMovies({
-    required int page,
-    required String query,});
+  Future<MovieResponseModel> getMovies();
 }
 class DashboardDataSourceImpl extends DashboardDataSource {
   @override
-  Future<MovieResponseModel> getMovies({
-    required int page,
-    required String query,
-  }) async {
+  Future<MovieResponseModel> getMovies() async {
     print("enter in data source 1");
     try {
       print("enter in data source 2");
 
       final url = Uri.parse(
-        "${ApiConstants.baseUrl}?s=$query&page=$page&apikey=${ApiConstants.apiKey}",
+        "${ApiConstants.baseUrl}?s=batman&page=1&apikey=${ApiConstants.apiKey}",
       );
 
       print("enter in data source 3");
@@ -44,7 +38,7 @@ class DashboardDataSourceImpl extends DashboardDataSource {
       }
 
     } catch (e) {
-      print("❌ API ERROR: $e");
+      print("enter catch remote api call $e");
       throw Exception("API Failed: $e");
     }
   }

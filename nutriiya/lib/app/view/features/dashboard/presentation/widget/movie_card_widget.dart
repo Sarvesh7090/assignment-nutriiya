@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import '../../domain/entity/movie_entity.dart';
+import '../../data/model/movie_model.dart';
 
 class MovieCard extends StatelessWidget {
-  final MovieEntity movie;
+  final Search movie;
   final VoidCallback onTap;
 
   const MovieCard({required this.movie, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
+    print("enter in MovieCard");
     return Card(
       margin: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       elevation: 3,

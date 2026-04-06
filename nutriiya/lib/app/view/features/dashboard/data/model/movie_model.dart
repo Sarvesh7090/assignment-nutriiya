@@ -1,8 +1,18 @@
 import '../../domain/entity/movie_entity.dart';
 
-class MovieResponseModel {
+import 'package:hive/hive.dart';
+
+part 'movie_model.g.dart';
+
+@HiveType(typeId: 0)
+class MovieResponseModel extends HiveObject {
+  @HiveField(0)
   List<Search> search;
+
+  @HiveField(1)
   String totalResults;
+
+  @HiveField(2)
   String response;
 
   MovieResponseModel({
@@ -16,8 +26,8 @@ class MovieResponseModel {
       search: (json["Search"] as List)
           .map((e) => Search.fromJson(e))
           .toList(),
-      totalResults: json["totalResults"],
-      response: json["Response"],
+      totalResults: json["totalResults"] ?? "",
+      response: json["Response"] ?? "",
     );
   }
 
@@ -30,10 +40,18 @@ class MovieResponseModel {
   }
 }
 
-class Search {
+@HiveType(typeId: 1)
+class Search extends HiveObject {
+  @HiveField(0)
   String title;
+
+  @HiveField(1)
   String year;
+
+  @HiveField(2)
   String imdbID;
+
+  @HiveField(3)
   String poster;
 
   Search({

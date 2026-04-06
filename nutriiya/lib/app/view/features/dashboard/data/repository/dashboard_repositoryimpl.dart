@@ -1,4 +1,3 @@
-import 'package:nutriiya/app/view/features/dashboard/domain/entity/movie_item_entity.dart';
 
 import '../../domain/entity/movie_entity.dart';
 import '../../domain/repositories/dasboard_repository.dart';
@@ -7,29 +6,38 @@ import '../datasources/dashboard_local_data_source.dart';
 
 class MovieRepositoryImpl implements MovieRepository {
   final DashboardDataSource remote;
-  MovieRepositoryImpl(this.remote);
+  final MovieRemoteDataSource local;
 
-  @override
+  MovieRepositoryImpl(this.remote, this.local);
+
   Future<MovieEntity> getMovies({
     required int page,
     required String query,
+    bool forceRefresh = false,
   }) async {
-    print("enter in MovieRepositoryImpl");
-    try {
-      final model = await remote.getMovies(page: page, query: query);
-      return model.toEntity();
-    } catch (e) {
-      return MovieEntity(
-        search: [],
-        totalResults: "0",
-        response: "False",
-      );
-    }
-  }
 
-  @override
-  Future<MovieItemEntity> getMovieDetail(String imdbID) {
-    // TODO: implement getMovieDetail
-    throw UnimplementedError();
+    final lastFetch = local.getLastFetchTime();
+
+    final isExpired = lastFetch == null ||
+        DateTime.now().difference(lastFetch).inHours >= 24;
+
+    if (forceRefresh || isExpired) {
+
+      print("🌐 Fetching from API");
+      final remoteData = await remote.getMovies();
+      await local.cacheData(remoteData);
+      return remoteData.toEntity();
+    } else {
+
+      print("Loading from Hive");
+
+      final localData = local.getData();
+
+      if (localData != null) {
+        return localData.toEntity();
+      } else {
+        throw Exception("No cached data available");
+      }
+    }
   }
 }
