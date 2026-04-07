@@ -48,13 +48,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
           }
 
           if (vm.errorMsg != null) {
+            print("error state 51 ${vm.errorMsg}");
             return Center(child: Text(vm.errorMsg!));
           }
 
           if (vm.movies.isEmpty) {
             return const Center(child: Text("No Movies Found"));
           }
-
+          print("enter in dashboard page");
           return RefreshIndicator(
             onRefresh: () => vm.loadMovies(forceRefresh: true),
             child: ListView.builder(

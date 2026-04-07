@@ -15,7 +15,6 @@ class MovieViewModel extends ChangeNotifier {
 
   Future<void> loadMovies({bool forceRefresh = false}) async {
     isLoading = true;
-    errorMsg = "";
     notifyListeners();
 
     try {
