@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../view_model.dart';
+import '../widget/bottom_sheet_detail.dart';
 import 'detail_page.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -73,12 +74,22 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   ),
                   child: ListTile(
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => DetailScreen(movie:movie ),
-                        ),
+                      showModalBottomSheet(
+                        context: context,
+                        isScrollControlled: true,
+                        isDismissible: true,
+                        enableDrag: true,
+                        backgroundColor: Colors.transparent,
+                        builder: (context) {
+                          return BottomSheetDetail(movie: movie);
+                        },
                       );
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //     builder: (_) => DetailScreen(movie:movie ),
+                      //   ),
+                      // );
                     },
                     leading: ClipRRect(
                       borderRadius: BorderRadius.circular(8),

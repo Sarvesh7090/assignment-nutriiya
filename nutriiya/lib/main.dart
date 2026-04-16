@@ -1,12 +1,10 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-// Presentation
+import 'app/view/features/bluetooth/presentation/page/bluetooth_page.dart';
 import 'app/view/features/dashboard/data/datasources/dasboard_data_source.dart';
 import 'app/view/features/dashboard/data/datasources/dashboard_local_data_source.dart';
 import 'app/view/features/dashboard/data/model/movie_model.dart';

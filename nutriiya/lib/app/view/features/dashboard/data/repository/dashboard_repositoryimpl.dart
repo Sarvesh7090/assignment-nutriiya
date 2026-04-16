@@ -17,13 +17,13 @@ class MovieRepositoryImpl implements MovieRepository {
   }) async {
 
     final lastFetch = local.getLastFetchTime();
+    print('time $lastFetch || ${DateTime.now().difference(lastFetch!).inHours}');
 
-    final isExpired = lastFetch == null ||
-        DateTime.now().difference(lastFetch).inHours >= 24;
-
+    final isExpired = lastFetch == null || DateTime.now().difference(lastFetch).inHours >= 24;
+    print("isExpired $isExpired");
     if (forceRefresh || isExpired) {
 
-      print("🌐 Fetching from API");
+      print("Fetching from API");
       final remoteData = await remote.getMovies();
       await local.cacheData(remoteData);
       return remoteData.toEntity();
