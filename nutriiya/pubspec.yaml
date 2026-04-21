@@ -51,6 +51,8 @@ dependencies:
   flutter_blue_plus: ^1.32.0
   get: ^4.7.3
   permission_handler: ^12.0.1
+  riverpod: ^3.2.1
+  flutter_riverpod: ^3.3.1
 
 dev_dependencies:
   flutter_test:

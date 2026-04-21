@@ -15,9 +15,9 @@ class MovieRepositoryImpl implements MovieRepository {
     required String query,
     bool forceRefresh = false,
   }) async {
-
+    print("inside MovieRepositoryImpl");
     final lastFetch = local.getLastFetchTime();
-    print('time $lastFetch || ${DateTime.now().difference(lastFetch!).inHours}');
+    // print('time $lastFetch || ${DateTime.now().difference(lastFetch!).inHours}');
 
     final isExpired = lastFetch == null || DateTime.now().difference(lastFetch).inHours >= 24;
     print("isExpired $isExpired");

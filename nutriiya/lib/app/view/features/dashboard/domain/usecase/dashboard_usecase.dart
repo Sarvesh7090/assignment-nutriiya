@@ -8,7 +8,7 @@ class GetMoviesUseCase{
   GetMoviesUseCase(this.repository);
 
   Future<MovieEntity> call() {
-    print("enter in usecase");
+    print("enter in usecase ${repository.getMovies(page: 1, query: '').toString()}");
     return repository.getMovies(page: 1, query: '');
   }
 }
