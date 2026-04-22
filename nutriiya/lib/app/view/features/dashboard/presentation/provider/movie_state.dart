@@ -4,6 +4,7 @@ import '../../domain/entity/movie_entity.dart';
 
 class MovieState {
   final List<Search> movies;
+  final List<Search> allMovies;
   final bool isLoading;
   final bool isLoadingMore;
   final bool hasMore;
@@ -12,6 +13,7 @@ class MovieState {
 
   MovieState({
     this.movies = const [],
+    this.allMovies = const [],
     this.page = 0,
     this.isLoading = false,
     this.error,
@@ -20,6 +22,7 @@ class MovieState {
 });
   MovieState copyWith({
     List<Search>? movies,
+    List<Search>? allMovies,
     bool? isLoading,
     bool? isLoadingMore,
     bool? hasMore,
@@ -32,7 +35,8 @@ class MovieState {
       hasMore: hasMore ?? this.hasMore,
       isLoadingMore: isLoadingMore ?? this.isLoadingMore,
       movies: movies ?? this.movies,
-      page: page ?? this.page
+      page: page ?? this.page,
+      allMovies: allMovies ?? this.allMovies
     );
   }
 }
